@@ -1,17 +1,19 @@
 package mainPackage.oksoft;
 
 import mainPackage.config.ConfProperties;
-import mainPackage.habr.HabrPage;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
+import org.junit.runners.MethodSorters;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class OksoftTest {
 
     public static MainPage mainPage;
+    public static AuthorizedPage authorizedPage;
+    public static MensClothesPage mensClothesPage;
     public static WebDriver driver;
 
     private static String login;
@@ -28,6 +30,8 @@ public class OksoftTest {
         driver.get(ConfProperties.getProperty("oksoftpage"));
 
         mainPage = new MainPage(driver);
+        authorizedPage = new AuthorizedPage(driver);
+        mensClothesPage = new MensClothesPage(driver);
     }
 
     @Test
@@ -35,5 +39,37 @@ public class OksoftTest {
         mainPage.openEnteringWindow();
 
         mainPage.enter(login, password);
+
+        Assert.assertEquals("5518\nКузнецова", authorizedPage.getName());
+    }
+
+    @Test
+    public void testFilters(){
+        authorizedPage.openMensClothesPage();
+
+        mensClothesPage.chooseDemiSeason();
+        mensClothesPage.chooseClasp();
+
+        Assert.assertEquals(1, mensClothesPage.cardsCount());
+    }
+
+    @Test
+    public void testFiltersWithSummer(){
+        authorizedPage.openMensClothesPage();
+
+        mensClothesPage.chooseDemiSeason();
+        mensClothesPage.chooseClasp();
+        mensClothesPage.chooseSummer();
+
+        Assert.assertEquals(2, mensClothesPage.cardsCount());
+
+        mensClothesPage.chooseDemiSeason();
+
+        Assert.assertEquals(1, mensClothesPage.cardsCount());
+    }
+
+    @AfterClass
+    public static void end(){
+        driver.close();
     }
 }
