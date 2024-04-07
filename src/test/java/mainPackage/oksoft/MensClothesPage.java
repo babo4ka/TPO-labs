@@ -3,6 +3,7 @@ package mainPackage.oksoft;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -29,6 +30,8 @@ public class MensClothesPage {
     @FindBy(xpath = "//*[@id=\"ChkBx_15_30\"]")
     private WebElement pugovkaBtn;
 
+    @FindBy(xpath = "//*[@id=\"wrapper\"]/div[2]/section/div/div[1]/div/div/div[12]/button")
+    private WebElement filtersClearBtn;
 
     public void chooseDemiSeason(){
         seasonDrop.click();
@@ -43,6 +46,11 @@ public class MensClothesPage {
     public void chooseClasp(){
         claspTypeDrop.click();
         pugovkaBtn.click();
+    }
+
+    public void filtersClear(){
+        new Actions(driver).scrollToElement(filtersClearBtn).perform();
+        filtersClearBtn.click();
     }
 
     public int cardsCount(){

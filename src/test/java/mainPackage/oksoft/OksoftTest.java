@@ -54,9 +54,14 @@ public class OksoftTest {
     }
 
     @Test
-    public void testFiltersWithSummer(){
-        authorizedPage.openMensClothesPage();
+    public void testFiltersClear(){
+        mensClothesPage.filtersClear();
 
+        Assert.assertEquals(5, mensClothesPage.cardsCount());
+    }
+
+    @Test
+    public void testFiltersWithSummer(){
         mensClothesPage.chooseDemiSeason();
         mensClothesPage.chooseClasp();
         mensClothesPage.chooseSummer();
