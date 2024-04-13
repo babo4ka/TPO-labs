@@ -33,24 +33,44 @@ public class MensClothesPage {
     @FindBy(xpath = "//*[@id=\"wrapper\"]/div[2]/section/div/div[1]/div/div/div[12]/button")
     private WebElement filtersClearBtn;
 
+
+    @FindBy(xpath = "//*[@id=\"navbarDropdownMenuLink-4\"]")
+    private WebElement accInfo;
+
+    @FindBy(xpath = "/html/body/header/nav[2]/div/div[2]/ul/li/a")
+    private WebElement logoutBtn;
+
     public void chooseDemiSeason(){
+        new Actions(driver).scrollToElement(seasonDrop).perform();
         seasonDrop.click();
+        new Actions(driver).scrollToElement(demiSeasonBtn).perform();
         demiSeasonBtn.click();
     }
 
     public void chooseSummer(){
+        new Actions(driver).scrollToElement(seasonDrop).perform();
         seasonDrop.click();
+        new Actions(driver).scrollToElement(summerSeasonBtn).perform();
         summerSeasonBtn.click();
     }
 
     public void chooseClasp(){
+        new Actions(driver).scrollToElement(claspTypeDrop).perform();
         claspTypeDrop.click();
+        new Actions(driver).scrollToElement(pugovkaBtn).perform();
         pugovkaBtn.click();
     }
 
     public void filtersClear(){
         new Actions(driver).scrollToElement(filtersClearBtn).perform();
         filtersClearBtn.click();
+    }
+
+
+
+    public void logout(){
+        accInfo.click();
+        logoutBtn.click();
     }
 
     public int cardsCount(){

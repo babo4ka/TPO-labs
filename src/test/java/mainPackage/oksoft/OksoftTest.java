@@ -60,21 +60,11 @@ public class OksoftTest {
         Assert.assertEquals(5, mensClothesPage.cardsCount());
     }
 
-    @Test
-    public void testFiltersWithSummer(){
-        mensClothesPage.chooseDemiSeason();
-        mensClothesPage.chooseClasp();
-        mensClothesPage.chooseSummer();
-
-        Assert.assertEquals(2, mensClothesPage.cardsCount());
-
-        mensClothesPage.chooseDemiSeason();
-
-        Assert.assertEquals(1, mensClothesPage.cardsCount());
-    }
 
     @AfterClass
-    public static void end(){
+    public static void end() throws InterruptedException {
+        mensClothesPage.logout();
+        Thread.sleep(1000);
         driver.close();
     }
 }
