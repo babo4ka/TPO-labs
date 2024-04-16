@@ -40,6 +40,14 @@ public class MensClothesPage {
     @FindBy(xpath = "/html/body/header/nav[2]/div/div[2]/ul/li/a")
     private WebElement logoutBtn;
 
+    @FindBy(xpath = "/html/body/header/nav[2]/div/a[1]")
+    private WebElement goMainBtn;
+
+    public void goMain(){
+        new Actions(driver).scrollToElement(goMainBtn).perform();
+        goMainBtn.click();
+    }
+
     public void chooseDemiSeason(){
         new Actions(driver).scrollToElement(seasonDrop).perform();
         seasonDrop.click();

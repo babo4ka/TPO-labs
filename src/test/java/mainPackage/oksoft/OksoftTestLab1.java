@@ -9,7 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class OksoftTest {
+public class OksoftTestLab1 {
 
     public static MainPage mainPage;
     public static AuthorizedPage authorizedPage;
@@ -59,6 +59,8 @@ public class OksoftTest {
 
         Assert.assertEquals(5, mensClothesPage.cardsCount());
     }
+
+
 
 
     @AfterClass
