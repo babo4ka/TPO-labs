@@ -20,7 +20,7 @@ public class MainPage {
         this.driver = driver;
     }
 
-    @FindBy(xpath = "(//*[@id=\"navbar-static-login\"])[3]")
+    @FindBy(xpath = "//*[@id=\"navbar-static-login\"]")
     private WebElement enterWindowButton;
 
 
@@ -34,7 +34,7 @@ public class MainPage {
 
     public void openEnteringWindow(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.of(10, ChronoUnit.SECONDS));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@id=\"navbar-static-login\"])[3]")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"navbar-static-login\"]")));
 
         enterWindowButton.click();
     }

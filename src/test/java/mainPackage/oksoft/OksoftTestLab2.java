@@ -1,11 +1,14 @@
 package mainPackage.oksoft;
 
 import mainPackage.config.ConfProperties;
+import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class OksoftTestLab2 {
@@ -17,6 +20,7 @@ public class OksoftTestLab2 {
 
     private static String login;
     private static String password;
+
 
     @BeforeClass
     public static void setup(){
@@ -35,15 +39,21 @@ public class OksoftTestLab2 {
 
 
     @Test
-    public void testPagination(){
+    public void testPagination() throws InterruptedException, IOException {
         mainPage.openEnteringWindow();
 
         mainPage.enter(login, password);
 
         authorizedPage.openOrdersStoryPage();
 
-        ordersStoryPage.openLastPage();
+        ordersStoryPage.countPagesAndPosts();
     }
 
+    @AfterClass
+    public static void end() throws InterruptedException {
+        ordersStoryPage.logout();
+        Thread.sleep(1000);
+        driver.close();
+    }
 
 }
