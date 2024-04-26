@@ -1,60 +1,59 @@
 package mainPackage.oksoft;
 
 import mainPackage.config.ConfProperties;
-
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-public class OksoftTestLab2 {
+public class OksoftTestLab3 {
+
+    public static WebDriver driver;
 
     public static MainPage mainPage;
     public static AuthorizedPage authorizedPage;
-    public static OrdersStoryPage ordersStoryPage;
-    public static WebDriver driver;
+
 
     private static String login;
     private static String password;
 
 
     @BeforeClass
-    public static void setup(){
-        login = ConfProperties.getProperty("oksoftLogin");
-        password = ConfProperties.getProperty("oksoftPassword");
+    @Parameters({"browser"})
+    public static void setup(String browser){
+        if (browser.equalsIgnoreCase("Chrome")) {
+            driver = new ChromeDriver();
+        }
+        else if (browser.equalsIgnoreCase("Edge")) {
+            driver = new EdgeDriver();
+        }
 
-        driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         driver.get(ConfProperties.getProperty("oksoftpage"));
 
-        mainPage = new MainPage(driver);
-        authorizedPage = new AuthorizedPage(driver);
-        ordersStoryPage = new OrdersStoryPage(driver);
+        login = ConfProperties.getProperty("oksoftLogin");
+        password = ConfProperties.getProperty("oksoftPassword");
     }
 
+    @Test(priority = 0)
+    public void enter(){
+        mainPage = new MainPage(driver);
 
-    @Test
-    public void testPagination() throws InterruptedException, IOException {
         mainPage.openEnteringWindow();
 
         mainPage.enter(login, password);
-
-        authorizedPage.openOrdersStoryPage();
-
-        ordersStoryPage.countPagesAndPosts();
     }
+
 
     @AfterClass
     public static void end() throws InterruptedException {
-        ordersStoryPage.logout();
-        Thread.sleep(1000);
         driver.close();
     }
-
 }

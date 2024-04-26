@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Testing Oksoft">
+<!--    <test name="test entering and filters">-->
+<!--        <classes>-->
+<!--            <class name="mainPackage.oksoft.OksoftTestLab1"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="test pagination">-->
+<!--        <classes>-->
+<!--            <class name="mainPackage.oksoft.OksoftTestLab2"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+    <test name="crossbrowser test chrome">
+        <parameter name="browser" value="Chrome"/>
+        <classes>
+            <class name="mainPackage.oksoft.OksoftTestLab3"/>
+        </classes>
+    </test>
+
+    <test name="crossbrowser test edge">
+        <parameter name="browser" value="Edge"/>
+        <classes>
+            <class name="mainPackage.oksoft.OksoftTestLab3"/>
+        </classes>
+    </test>
+
+</suite>
