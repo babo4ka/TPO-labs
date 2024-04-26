@@ -4,27 +4,27 @@
 <suite name="Testing Oksoft">
 <!--    <test name="test entering and filters">-->
 <!--        <classes>-->
-<!--            <class name="mainPackage.oksoft.OksoftTestLab1"/>-->
+<!--            <class name="mainPackage.oksoft.lab1.OksoftTestLab1"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
 <!--    <test name="test pagination">-->
 <!--        <classes>-->
-<!--            <class name="mainPackage.oksoft.OksoftTestLab2"/>-->
+<!--            <class name="mainPackage.oksoft.lab2.OksoftTestLab2"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
     <test name="crossbrowser test chrome">
         <parameter name="browser" value="Chrome"/>
         <classes>
-            <class name="mainPackage.oksoft.OksoftTestLab3"/>
+            <class name="mainPackage.oksoft.lab3.OksoftTestLab3"/>
         </classes>
     </test>
 
     <test name="crossbrowser test edge">
         <parameter name="browser" value="Edge"/>
         <classes>
-            <class name="mainPackage.oksoft.OksoftTestLab3"/>
+            <class name="mainPackage.oksoft.lab3.OksoftTestLab3"/>
         </classes>
     </test>
 

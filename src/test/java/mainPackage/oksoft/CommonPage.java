@@ -1,5 +1,6 @@
 package mainPackage.oksoft;
 
+import com.beust.ah.A;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,11 +22,20 @@ public class CommonPage {
         this.driver = driver;
     }
 
-
+    //ОБ АККАУНТЕ
     //имя аккаунта
     @FindBy(xpath = "//*[@id=\"navbarDropdownMenuLink-4\"]/div[2]")
     protected WebElement nameText;
 
+    //инфо об аккаунте
+    @FindBy(xpath = "//*[@id=\"navbarDropdownMenuLink-4\"]")
+    protected WebElement accInfo;
+
+    //кнопка выхода из аккаунта
+    @FindBy(xpath = "/html/body/header/nav[2]/div/div[2]/ul/li/a")
+    protected WebElement logoutBtn;
+
+    //МОЙ КАБИНЕТ
     //кнопка мой кабинет
     @FindBy(xpath = "//*[@id=\"navbarDropdownMenuLink-20\"]")
     protected WebElement accountBtn;
@@ -33,11 +43,17 @@ public class CommonPage {
     //кнопка истории заказов
     @FindBy(xpath = "//*[@id=\"navbarCollapse\"]/ul[2]/li[5]/div/a[16]")
     private WebElement ordersStoryBtn;
-
     //кнопка мои вознаграждения
     @FindBy(xpath = "//*[@id=\"navbarCollapse\"]/ul[2]/li[5]/div/a[2]")
     private WebElement rewardsBtn;
+    //кнопка мой кошелёк
+    @FindBy(xpath = "//*[@id=\"navbarCollapse\"]/ul[2]/li[5]/div/a[7]")
+    private WebElement walletBtn;
+    //кнопка финансовые заявки
+    @FindBy(xpath = "//*[@id=\"navbarCollapse\"]/ul[2]/li[5]/div/a[8]")
+    private WebElement zayavkiBtn;
 
+    //КАТАЛОГ
     //кнопка каталога
     @FindBy(xpath = "//*[@id=\"navbarCollapse\"]/ul[1]/li/a")
     private WebElement dropCatalogBtn;
@@ -45,15 +61,6 @@ public class CommonPage {
     @FindBy(xpath = "//*[@id=\"navbarCollapse\"]/ul[1]/li/div/div[1]/div[1]/div/ul/li[2]/a")
     private WebElement mensClothesBtn;
 
-
-
-    //инфо об аккаунте
-    @FindBy(xpath = "//*[@id=\"navbarDropdownMenuLink-4\"]")
-    protected WebElement accInfo;
-
-    //кнопка выхода из профиля
-    @FindBy(xpath = "/html/body/header/nav[2]/div/div[2]/ul/li/a")
-    protected WebElement logoutBtn;
 
     //кнопка на главную
     @FindBy(xpath = "/html/body/header/nav[2]/div/a[1]")
@@ -87,22 +94,41 @@ public class CommonPage {
         mensClothesBtn.click();
     }
 
-    //открывает страницу истории заказов
-    public void openOrdersStoryPage(){
+    //открывает меню мой кабинет
+    private void openAccount(){
         new Actions(driver).scrollToElement(accountBtn).perform();
         accountBtn.click();
+    }
+
+    //открывает страницу истории заказов
+    public void openOrdersStoryPage(){
+        openAccount();
 
         new Actions(driver).scrollToElement(ordersStoryBtn).perform();
         ordersStoryBtn.click();
     }
-
+    //открывает страницу вознаграждений
     public void openRewardsPage(){
-        new Actions(driver).scrollToElement(accountBtn).perform();
-        accountBtn.click();
+        openAccount();
 
         new Actions(driver).scrollToElement(rewardsBtn).perform();
         rewardsBtn.click();
     }
+    //открывает страницу мой кошелёк
+    public void openWalletPage(){
+        openAccount();
+
+        new Actions(driver).scrollToElement(walletBtn).perform();
+        walletBtn.click();
+    }
+    //открывает страницу с финансовыми заявками
+    public void openZayavkiPage(){
+        openAccount();
+
+        new Actions(driver).scrollToElement(zayavkiBtn).perform();
+        zayavkiBtn.click();
+    }
+
 
     public String getName(){
         return nameText.getText();

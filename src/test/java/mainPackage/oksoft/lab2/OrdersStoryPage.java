@@ -1,5 +1,6 @@
-package mainPackage.oksoft;
+package mainPackage.oksoft.lab2;
 
+import mainPackage.oksoft.CommonPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +12,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class OrdersStoryPage extends CommonPage{
+public class OrdersStoryPage extends CommonPage {
 
 
     public OrdersStoryPage(WebDriver driver){

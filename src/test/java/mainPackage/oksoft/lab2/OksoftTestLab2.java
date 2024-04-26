@@ -1,26 +1,29 @@
-package mainPackage.oksoft;
+package mainPackage.oksoft.lab2;
 
 import mainPackage.config.ConfProperties;
 
+
+import mainPackage.oksoft.CommonPage;
+import mainPackage.oksoft.MainPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class OksoftTestLab1 {
+public class OksoftTestLab2 {
 
     public static MainPage mainPage;
     public static CommonPage commonPage;
-    public static MensClothesPage mensClothesPage;
+    public static OrdersStoryPage ordersStoryPage;
     public static WebDriver driver;
 
     private static String login;
     private static String password;
+
 
     @BeforeClass
     public static void setup(){
@@ -34,42 +37,26 @@ public class OksoftTestLab1 {
 
         mainPage = new MainPage(driver);
         commonPage = new CommonPage(driver);
-        mensClothesPage = new MensClothesPage(driver);
+        ordersStoryPage = new OrdersStoryPage(driver);
     }
 
-    @Test(priority = 0)
-    public void enterTest(){
+
+    @Test
+    public void testPagination() throws InterruptedException, IOException {
         mainPage.openEnteringWindow();
 
         mainPage.enter(login, password);
 
-        Assert.assertEquals("5518\nКузнецова", commonPage.getName());
+        commonPage.openOrdersStoryPage();
+
+        ordersStoryPage.countPagesAndPosts();
     }
-
-    @Test(priority = 1)
-    public void testFilters(){
-        commonPage.openMensClothesPage();
-
-        mensClothesPage.chooseDemiSeason();
-        mensClothesPage.chooseClasp();
-
-        Assert.assertEquals(1, mensClothesPage.cardsCount());
-    }
-
-    @Test(priority = 2)
-    public void testFiltersClear(){
-        mensClothesPage.filtersClear();
-
-        Assert.assertEquals(5, mensClothesPage.cardsCount());
-    }
-
-
-
 
     @AfterClass
     public static void end() throws InterruptedException {
-        mensClothesPage.logout();
+        ordersStoryPage.logout();
         Thread.sleep(1000);
         driver.close();
     }
+
 }
