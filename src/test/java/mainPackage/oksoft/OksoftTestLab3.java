@@ -16,7 +16,7 @@ public class OksoftTestLab3 {
     public static WebDriver driver;
 
     public static MainPage mainPage;
-    public static AuthorizedPage authorizedPage;
+    public static CommonPage commonPage;
 
 
     private static String login;
@@ -40,6 +40,7 @@ public class OksoftTestLab3 {
 
         login = ConfProperties.getProperty("oksoftLogin");
         password = ConfProperties.getProperty("oksoftPassword");
+        commonPage = new CommonPage(driver);
     }
 
     @Test(priority = 0)
@@ -49,6 +50,8 @@ public class OksoftTestLab3 {
         mainPage.openEnteringWindow();
 
         mainPage.enter(login, password);
+
+        commonPage.openRewardsPage();
     }
 
 

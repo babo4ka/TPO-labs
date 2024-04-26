@@ -11,29 +11,17 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class OrdersStoryPage {
+public class OrdersStoryPage extends CommonPage{
 
-    public WebDriver driver;
 
     public OrdersStoryPage(WebDriver driver){
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
+        super(driver);
     }
 
 
     @FindBy(xpath = "//*[@id=\"wrapper\"]/div/section/nav/ul/li[last()]")
     private WebElement nextPaginationBtn;
 
-    @FindBy(xpath = "//*[@id=\"navbarDropdownMenuLink-4\"]")
-    private WebElement accInfo;
-
-    @FindBy(xpath = "/html/body/header/nav[2]/div/div[2]/ul/li/a")
-    private WebElement logoutBtn;
-
-    public void logout(){
-        accInfo.click();
-        logoutBtn.click();
-    }
 
     private void openNextPage(){
         new Actions(driver).scrollToElement(nextPaginationBtn).perform();

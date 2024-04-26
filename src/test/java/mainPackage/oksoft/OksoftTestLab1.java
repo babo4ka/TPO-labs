@@ -2,8 +2,6 @@ package mainPackage.oksoft;
 
 import mainPackage.config.ConfProperties;
 
-import org.junit.FixMethodOrder;
-import org.junit.runners.MethodSorters;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -17,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class OksoftTestLab1 {
 
     public static MainPage mainPage;
-    public static AuthorizedPage authorizedPage;
+    public static CommonPage commonPage;
     public static MensClothesPage mensClothesPage;
     public static WebDriver driver;
 
@@ -35,7 +33,7 @@ public class OksoftTestLab1 {
         driver.get(ConfProperties.getProperty("oksoftpage"));
 
         mainPage = new MainPage(driver);
-        authorizedPage = new AuthorizedPage(driver);
+        commonPage = new CommonPage(driver);
         mensClothesPage = new MensClothesPage(driver);
     }
 
@@ -45,12 +43,12 @@ public class OksoftTestLab1 {
 
         mainPage.enter(login, password);
 
-        Assert.assertEquals("5518\nКузнецова", authorizedPage.getName());
+        Assert.assertEquals("5518\nКузнецова", commonPage.getName());
     }
 
     @Test(priority = 1)
     public void testFilters(){
-        authorizedPage.openMensClothesPage();
+        commonPage.openMensClothesPage();
 
         mensClothesPage.chooseDemiSeason();
         mensClothesPage.chooseClasp();

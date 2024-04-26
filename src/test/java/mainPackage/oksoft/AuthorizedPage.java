@@ -12,17 +12,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
-public class AuthorizedPage {
-
-    public WebDriver driver;
+public class AuthorizedPage extends CommonPage{
 
     public AuthorizedPage(WebDriver driver){
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
+        super(driver);
     }
-
-    @FindBy(xpath = "//*[@id=\"navbarDropdownMenuLink-4\"]/div[2]")
-    private WebElement nameText;
 
     @FindBy(xpath = "//*[@id=\"navbarCollapse\"]/ul[1]/li/a")
     private WebElement dropCatalogBtn;
@@ -30,11 +24,11 @@ public class AuthorizedPage {
     private WebElement mensClothesBtn;
 
 
-    @FindBy(xpath = "//*[@id=\"navbarDropdownMenuLink-20\"]")
-    private WebElement accountBtn;
-
     @FindBy(xpath = "//*[@id=\"navbarCollapse\"]/ul[2]/li[5]/div/a[16]")
     private WebElement ordersStoryBtn;
+
+    @FindBy(xpath = "//*[@id=\"navbarCollapse\"]/ul[2]/li[5]/div/a[2]")
+    private WebElement rewardsBtn;
 
     public void openMensClothesPage(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.of(10, ChronoUnit.SECONDS));
@@ -46,12 +40,11 @@ public class AuthorizedPage {
 
 
     public void openOrdersStoryPage(){
-        new Actions(driver).scrollToElement(accountBtn).perform();
-        accountBtn.click();
 
         new Actions(driver).scrollToElement(ordersStoryBtn).perform();
         ordersStoryBtn.click();
     }
+
 
     public String getName(){
         return nameText.getText();

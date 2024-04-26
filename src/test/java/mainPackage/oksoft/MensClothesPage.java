@@ -7,13 +7,10 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class MensClothesPage {
-
-    public WebDriver driver;
+public class MensClothesPage extends CommonPage{
 
     public MensClothesPage(WebDriver driver){
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
+        super(driver);
     }
 
 
@@ -34,19 +31,6 @@ public class MensClothesPage {
     private WebElement filtersClearBtn;
 
 
-    @FindBy(xpath = "//*[@id=\"navbarDropdownMenuLink-4\"]")
-    private WebElement accInfo;
-
-    @FindBy(xpath = "/html/body/header/nav[2]/div/div[2]/ul/li/a")
-    private WebElement logoutBtn;
-
-    @FindBy(xpath = "/html/body/header/nav[2]/div/a[1]")
-    private WebElement goMainBtn;
-
-    public void goMain(){
-        new Actions(driver).scrollToElement(goMainBtn).perform();
-        goMainBtn.click();
-    }
 
     public void chooseDemiSeason(){
         new Actions(driver).scrollToElement(seasonDrop).perform();
@@ -75,11 +59,6 @@ public class MensClothesPage {
     }
 
 
-
-    public void logout(){
-        accInfo.click();
-        logoutBtn.click();
-    }
 
     public int cardsCount(){
         return driver

@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class OksoftTestLab2 {
 
     public static MainPage mainPage;
-    public static AuthorizedPage authorizedPage;
+    public static CommonPage commonPage;
     public static OrdersStoryPage ordersStoryPage;
     public static WebDriver driver;
 
@@ -34,7 +34,7 @@ public class OksoftTestLab2 {
         driver.get(ConfProperties.getProperty("oksoftpage"));
 
         mainPage = new MainPage(driver);
-        authorizedPage = new AuthorizedPage(driver);
+        commonPage = new CommonPage(driver);
         ordersStoryPage = new OrdersStoryPage(driver);
     }
 
@@ -45,7 +45,7 @@ public class OksoftTestLab2 {
 
         mainPage.enter(login, password);
 
-        authorizedPage.openOrdersStoryPage();
+        commonPage.openOrdersStoryPage();
 
         ordersStoryPage.countPagesAndPosts();
     }
