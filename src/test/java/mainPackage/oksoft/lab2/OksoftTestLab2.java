@@ -40,15 +40,22 @@ public class OksoftTestLab2 {
         ordersStoryPage = new OrdersStoryPage(driver);
     }
 
-
-    @Test
-    public void testPagination() throws InterruptedException, IOException {
+    @Test(priority = 0)
+    public void testCountOnLast() throws IOException {
         mainPage.openEnteringWindow();
 
         mainPage.enter(login, password);
 
         commonPage.openOrdersStoryPage();
 
+        ordersStoryPage.countOnLast();
+    }
+
+
+
+    @Test(priority = 1)
+    public void testPagination() throws InterruptedException, IOException {
+        commonPage.openOrdersStoryPage();
         ordersStoryPage.countPagesAndPosts();
     }
 

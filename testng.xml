@@ -8,24 +8,24 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-<!--    <test name="test pagination">-->
+    <test name="test pagination">
+        <classes>
+            <class name="mainPackage.oksoft.lab2.OksoftTestLab2"/>
+        </classes>
+    </test>
+
+<!--    <test name="crossbrowser test chrome">-->
+<!--        <parameter name="browser" value="Chrome"/>-->
 <!--        <classes>-->
-<!--            <class name="mainPackage.oksoft.lab2.OksoftTestLab2"/>-->
+<!--            <class name="mainPackage.oksoft.lab3.OksoftTestLab3"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
-    <test name="crossbrowser test chrome">
-        <parameter name="browser" value="Chrome"/>
-        <classes>
-            <class name="mainPackage.oksoft.lab3.OksoftTestLab3"/>
-        </classes>
-    </test>
-
-    <test name="crossbrowser test edge">
-        <parameter name="browser" value="Edge"/>
-        <classes>
-            <class name="mainPackage.oksoft.lab3.OksoftTestLab3"/>
-        </classes>
-    </test>
+<!--    <test name="crossbrowser test edge">-->
+<!--        <parameter name="browser" value="Edge"/>-->
+<!--        <classes>-->
+<!--            <class name="mainPackage.oksoft.lab3.OksoftTestLab3"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 </suite>

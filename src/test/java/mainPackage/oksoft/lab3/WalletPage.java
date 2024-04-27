@@ -33,6 +33,8 @@ public class WalletPage extends CommonPage {
     }
 
     public int checkInterval(){
+        new Actions(driver).scrollToElement(startDateInput).perform();
+
         startDateInput.sendKeys("23.04.2015");
         Date today = new Date();
         endDateInput.sendKeys(today.getDate() + "." + (today.getMonth()+1) + "." + (today.getYear() + 1900));

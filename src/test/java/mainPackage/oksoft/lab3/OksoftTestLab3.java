@@ -56,6 +56,7 @@ public class OksoftTestLab3 {
         zayavkiPage = new ZayavkiPage(driver);
     }
 
+
     @Test(priority = 0)
     public void testRewardsPage() throws InterruptedException {
         mainPage = new MainPage(driver);

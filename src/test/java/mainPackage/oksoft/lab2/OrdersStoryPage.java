@@ -23,10 +23,25 @@ public class OrdersStoryPage extends CommonPage {
     @FindBy(xpath = "//*[@id=\"wrapper\"]/div/section/nav/ul/li[last()]")
     private WebElement nextPaginationBtn;
 
+    @FindBy(xpath = "//*[@id=\"wrapper\"]/div/section/nav/ul/li[last()-1]")
+    private WebElement lastPaginationBtn;
+
 
     private void openNextPage(){
         new Actions(driver).scrollToElement(nextPaginationBtn).perform();
         nextPaginationBtn.click();
+    }
+
+    public void countOnLast() throws IOException {
+        new Actions(driver).scrollToElement(lastPaginationBtn).perform();
+        lastPaginationBtn.click();
+        int postsCount = driver.findElements(By.xpath("//*[contains(@class, 'card z-depth-1 mb-3')]")).size();
+
+        File file = new File("result_count.txt");
+        FileWriter writer = new FileWriter(file, false);
+
+        writer.write("количество записей на последней странице: " + postsCount);
+        writer.close();
     }
 
 
