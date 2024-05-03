@@ -1,5 +1,6 @@
 package mainPackage.oksoft.lab3;
 
+import io.qameta.allure.Description;
 import mainPackage.config.ConfProperties;
 import mainPackage.oksoft.CommonPage;
 import mainPackage.oksoft.MainPage;
@@ -61,6 +62,7 @@ public class OksoftTestLab3 {
 
 
     @Test(priority = 0)
+    @Description("Тестирование страницы \"Мои вознаграждения\"")
     public void testRewardsPage() throws InterruptedException {
         System.out.println("test rewards" + driver);
         mainPage.openEnteringWindow();
@@ -73,6 +75,7 @@ public class OksoftTestLab3 {
     }
 
     @Test(priority = 1)
+    @Description("Тестирование страницы \"Мой кошелёк\"")
     public void testWalletPage(){
         System.out.println("test wallet" + driver);
         rewardsPage.openWalletPage();
@@ -85,6 +88,7 @@ public class OksoftTestLab3 {
 
 
     @Test(priority = 2)
+    @Description("Тестирование страницы \"Финансовые заявки\"")
     public void testZayavkiPage() throws InterruptedException {
         System.out.println("test zayavki" + driver);
         walletPage.openZayavkiPage();
@@ -98,6 +102,7 @@ public class OksoftTestLab3 {
     }
 
     @Test(priority = 3)
+    @Description("Тестирование скролла \"Финансовые заявки\"")
     public void testScrollToLast(){
         System.out.println("test scroll" + driver);
         zayavkiPage.scrollToLast();
@@ -105,6 +110,7 @@ public class OksoftTestLab3 {
 
     @AfterClass
     public static void end() throws InterruptedException {
+        zayavkiPage.logout();
         Thread.sleep(1000);
         driver.close();
     }
