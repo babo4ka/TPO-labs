@@ -22,6 +22,10 @@ public class CommonPage {
         this.driver = driver;
     }
 
+    public void setDriver(WebDriver driver){
+        this.driver = driver;
+    }
+
     //ОБ АККАУНТЕ
     //имя аккаунта
     @FindBy(xpath = "//*[@id=\"navbarDropdownMenuLink-4\"]/div[2]")

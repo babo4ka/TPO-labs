@@ -3,20 +3,16 @@ package mainPackage.oksoft.lab3;
 import mainPackage.config.ConfProperties;
 import mainPackage.oksoft.CommonPage;
 import mainPackage.oksoft.MainPage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
 
 public class OksoftTestLab3 {
@@ -36,11 +32,16 @@ public class OksoftTestLab3 {
     @BeforeClass
     @Parameters({"browser"})
     public static void setup(String browser){
-        if (browser.equalsIgnoreCase("Chrome")) {
+        if (browser.equalsIgnoreCase("chrome")) {
             driver = new ChromeDriver();
+            System.out.println(browser);
         }
-        else if (browser.equalsIgnoreCase("Edge")) {
+        else if (browser.equalsIgnoreCase("edge")) {
             driver = new EdgeDriver();
+            System.out.println(browser);
+        } else if (browser.equalsIgnoreCase("firefox")) {
+            driver = new FirefoxDriver();
+            System.out.println(driver);
         }
 
         driver.manage().window().maximize();
@@ -54,13 +55,14 @@ public class OksoftTestLab3 {
         rewardsPage = new RewardsPage(driver);
         walletPage = new WalletPage(driver);
         zayavkiPage = new ZayavkiPage(driver);
+        mainPage = new MainPage(driver);
     }
+
 
 
     @Test(priority = 0)
     public void testRewardsPage() throws InterruptedException {
-        mainPage = new MainPage(driver);
-
+        System.out.println("test rewards" + driver);
         mainPage.openEnteringWindow();
 
         mainPage.enter(login, password);
@@ -72,6 +74,7 @@ public class OksoftTestLab3 {
 
     @Test(priority = 1)
     public void testWalletPage(){
+        System.out.println("test wallet" + driver);
         rewardsPage.openWalletPage();
         walletPage.openOperationDetails();
 
@@ -83,6 +86,7 @@ public class OksoftTestLab3 {
 
     @Test(priority = 2)
     public void testZayavkiPage() throws InterruptedException {
+        System.out.println("test zayavki" + driver);
         walletPage.openZayavkiPage();
 
         int sum = 150;
@@ -90,11 +94,12 @@ public class OksoftTestLab3 {
 
         String result = "Сумма: " + sum + ",00 ₽";
         System.out.println(zayavkiPage.checkZayavka());
-        Assert.assertEquals(result, zayavkiPage.checkZayavka());
+        Assert.assertEquals(zayavkiPage.checkZayavka(), result);
     }
 
     @Test(priority = 3)
     public void testScrollToLast(){
+        System.out.println("test scroll" + driver);
         zayavkiPage.scrollToLast();
     }
 

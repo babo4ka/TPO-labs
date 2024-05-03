@@ -20,6 +20,10 @@ public class MainPage {
         this.driver = driver;
     }
 
+    public void setDriver(WebDriver driver){
+        this.driver = driver;
+    }
+
     @FindBy(xpath = "//a[contains(@class, 'navbar-tool ms-1')]")
     private WebElement enterWindowButton;
 
@@ -29,7 +33,7 @@ public class MainPage {
     @FindBy(xpath = "//*[@id=\"ModalLoginPassword\"]")
     private WebElement passwordInput;
 
-    @FindBy(xpath = "//*[@id=\"LoginModalPanel1\"]/div[2]/div/button")
+    @FindBy(xpath = "//*[@id=\"LoginModalPanel1\"]/div[2]/div/div/button")
     private WebElement enterBtn;
 
     public void openEnteringWindow(){
