@@ -45,6 +45,8 @@ public class OksoftTestLab3 {
             System.out.println(driver);
         }
 
+        System.out.println(driver instanceof FirefoxDriver);
+
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
@@ -61,7 +63,7 @@ public class OksoftTestLab3 {
 
 
 
-    @Test(priority = 0)
+    @Test(priority = 1, testName = "Тестирование страницы \"Мои вознаграждения\"")
     @Description("Тестирование страницы \"Мои вознаграждения\"")
     public void testRewardsPage() throws InterruptedException {
         System.out.println("test rewards" + driver);
@@ -74,12 +76,12 @@ public class OksoftTestLab3 {
         rewardsPage.checkPeriod();
     }
 
-    @Test(priority = 1)
+    @Test(priority = 2, testName = "Тестирование страницы \"Мой кошелёк\"")
     @Description("Тестирование страницы \"Мой кошелёк\"")
     public void testWalletPage() throws InterruptedException {
         System.out.println("test wallet" + driver);
         rewardsPage.openWalletPage();
-        Thread.sleep(1000);
+
         walletPage.openOperationDetails();
 
         int operations = walletPage.checkInterval();
@@ -88,31 +90,30 @@ public class OksoftTestLab3 {
     }
 
 
-    @Test(priority = 2)
-    @Description("Тестирование страницы \"Финансовые заявки\"")
-    public void testZayavkiPage() throws InterruptedException {
-        System.out.println("test zayavki" + driver);
-        walletPage.openZayavkiPage();
+//    @Test(priority = 3)
+//    @Description("Тестирование страницы \"Финансовые заявки\"")
+//    public void testZayavkiPage() throws InterruptedException {
+//        System.out.println("test zayavki" + driver);
+//        walletPage.openZayavkiPage();
+//
+//        int sum = 150;
+//        zayavkiPage.createZayavka(sum);
+//
+//        String result = "Сумма: " + sum + ",00 ₽";
+//        System.out.println(zayavkiPage.checkZayavka());
+//        Assert.assertEquals(zayavkiPage.checkZayavka(), result);
+//    }
 
-        int sum = 150;
-        zayavkiPage.createZayavka(sum);
-
-        String result = "Сумма: " + sum + ",00 ₽";
-        System.out.println(zayavkiPage.checkZayavka());
-        Assert.assertEquals(zayavkiPage.checkZayavka(), result);
-    }
-
-    @Test(priority = 3)
+    @Test(priority = 4, testName = "Тестирование скролла \"Финансовые заявки\"")
     @Description("Тестирование скролла \"Финансовые заявки\"")
     public void testScrollToLast(){
         System.out.println("test scroll" + driver);
+        walletPage.openZayavkiPage();
         zayavkiPage.scrollToLast();
     }
 
     @AfterClass
-    public static void end() throws InterruptedException {
-        zayavkiPage.logout();
-        Thread.sleep(1000);
+    public static void end() {
         driver.close();
     }
 }

@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -33,23 +34,36 @@ public class WalletPage extends CommonPage {
     private WebElement showBtn;
 
     public void openOperationDetails(){
-        new WebDriverWait(driver, Duration.of(20, ChronoUnit.SECONDS))
-                .until(ExpectedConditions.elementToBeClickable(showOperationsBtn));
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", showOperationsBtn);
 
-        new Actions(driver).scrollToElement(showOperationsBtn).perform();
-        showOperationsBtn.click();
+        if(driver instanceof FirefoxDriver) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", showOperationsBtn);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", showOperationsBtn);
+        }else{
+            new Actions(driver).scrollToElement(showOperationsBtn).perform();
+            showOperationsBtn.click();
+        }
     }
 
-    public int checkInterval(){
-        new Actions(driver).scrollToElement(startDateInput).perform();
-
-        startDateInput.sendKeys("23.04.2015");
+    public int checkInterval() throws InterruptedException {
         Date today = new Date();
-        endDateInput.sendKeys(today.getDate() + "." + (today.getMonth()+1) + "." + (today.getYear() + 1900));
+        if(driver instanceof FirefoxDriver){
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", startDateInput);
+//            ((JavascriptExecutor) driver).executeScript(("arguments[0].value = 23.04.2015"), startDateInput);
+//            ((JavascriptExecutor) driver).executeScript(("arguments[0].value = " + today.getDate() + "." + (today.getMonth()+1) + "." + (today.getYear() + 1900)), endDateInput);
+            startDateInput.sendKeys("23.04.2015");
 
-        showBtn.click();
+            endDateInput.sendKeys(today.getDate() + "." + (today.getMonth()+1) + "." + (today.getYear() + 1900));
+
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", showBtn);
+        }else{
+            new Actions(driver).scrollToElement(startDateInput).perform();
+            startDateInput.sendKeys("23.04.2015");
+
+            endDateInput.sendKeys(today.getDate() + "." + (today.getMonth()+1) + "." + (today.getYear() + 1900));
+
+            showBtn.click();
+        }
 
         return driver
                 .findElements(By.xpath("//*[@id=\"ReportForm\"]/div[1]/div[3]/div/table/tbody/tr"))

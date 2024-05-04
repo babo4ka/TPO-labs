@@ -2,14 +2,17 @@ package mainPackage.oksoft;
 
 import com.beust.ah.A;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.FileReader;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
@@ -100,8 +103,14 @@ public class CommonPage {
 
     //открывает меню мой кабинет
     private void openAccount(){
-        new Actions(driver).scrollToElement(accountBtn).perform();
-        accountBtn.click();
+        if(driver instanceof FirefoxDriver){
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", accountBtn);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", accountBtn);
+        }else{
+            new Actions(driver).scrollToElement(accountBtn).perform();
+            accountBtn.click();
+        }
+
     }
 
     //открывает страницу истории заказов
@@ -129,8 +138,14 @@ public class CommonPage {
     public void openZayavkiPage(){
         openAccount();
 
-        new Actions(driver).scrollToElement(zayavkiBtn).perform();
-        zayavkiBtn.click();
+        if(driver instanceof FirefoxDriver){
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", zayavkiBtn);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", zayavkiBtn);
+        }else{
+            new Actions(driver).scrollToElement(zayavkiBtn).perform();
+            zayavkiBtn.click();
+        }
+
     }
 
 
