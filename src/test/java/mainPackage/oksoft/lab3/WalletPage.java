@@ -2,11 +2,16 @@ package mainPackage.oksoft.lab3;
 
 import mainPackage.oksoft.CommonPage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 public class WalletPage extends CommonPage {
@@ -28,6 +33,11 @@ public class WalletPage extends CommonPage {
     private WebElement showBtn;
 
     public void openOperationDetails(){
+        new WebDriverWait(driver, Duration.of(20, ChronoUnit.SECONDS))
+                .until(ExpectedConditions.elementToBeClickable(showOperationsBtn));
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", showOperationsBtn);
+
         new Actions(driver).scrollToElement(showOperationsBtn).perform();
         showOperationsBtn.click();
     }

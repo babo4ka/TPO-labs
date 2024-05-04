@@ -76,9 +76,10 @@ public class OksoftTestLab3 {
 
     @Test(priority = 1)
     @Description("Тестирование страницы \"Мой кошелёк\"")
-    public void testWalletPage(){
+    public void testWalletPage() throws InterruptedException {
         System.out.println("test wallet" + driver);
         rewardsPage.openWalletPage();
+        Thread.sleep(1000);
         walletPage.openOperationDetails();
 
         int operations = walletPage.checkInterval();
