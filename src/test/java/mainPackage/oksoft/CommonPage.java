@@ -153,4 +153,28 @@ public class CommonPage {
         return nameText.getText();
     }
 
+    protected void scrollToElement(WebElement element){
+        if(driver instanceof FirefoxDriver){
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", element);
+        }else{
+            new Actions(driver).scrollToElement(element).perform();
+        }
+    }
+
+    protected void clickElement(WebElement element){
+        if(driver instanceof FirefoxDriver){
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+        }else{
+            element.click();
+        }
+    }
+
+    protected String getTextFromElement(WebElement element){
+        if(driver instanceof FirefoxDriver){
+            return (String) ((JavascriptExecutor) driver).executeScript("return arguments[0].innerText", element);
+        }else{
+            return element.getText();
+        }
+    }
+
 }

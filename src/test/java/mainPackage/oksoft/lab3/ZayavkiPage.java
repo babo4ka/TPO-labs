@@ -38,24 +38,20 @@ public class ZayavkiPage extends CommonPage {
     private WebElement chooseType;
 
     public void createZayavka(int sum) throws InterruptedException {
-        if(driver instanceof FirefoxDriver){
 
-        }else{
-            new Actions(driver).scrollToElement(openModalZayavkaBtn).perform();
-            openModalZayavkaBtn.click();
+        scrollToElement(openModalZayavkaBtn);
+        clickElement(openModalZayavkaBtn);
 
-            Thread.sleep(1000);
-            new Actions(driver).scrollToElement(sumInput).perform();
-            sumInput.sendKeys(String.valueOf(sum));
+        Thread.sleep(1000);
 
-            changeTypeBox.click();
-            chooseType.click();
+        scrollToElement(sumInput);
+        sumInput.sendKeys(String.valueOf(sum));
 
-            new Actions(driver).scrollToElement(createZayavkaBtn).perform();
-            createZayavkaBtn.click();
-        }
+        clickElement(changeTypeBox);
+        clickElement(chooseType);
 
-
+        scrollToElement(createZayavkaBtn);
+        clickElement(createZayavkaBtn);
     }
 
     public void scrollToLast(){
@@ -68,7 +64,11 @@ public class ZayavkiPage extends CommonPage {
     }
 
     public String checkZayavka(){
-        new Actions(driver).scrollToElement(zayavkaSum).perform();
-        return zayavkaSum.getText();
+        scrollToElement(zayavkaSum);
+
+        String text = getTextFromElement(zayavkaSum);
+        System.out.println(text);
+
+        return text;
     }
 }

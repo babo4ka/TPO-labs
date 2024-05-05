@@ -34,36 +34,20 @@ public class WalletPage extends CommonPage {
     private WebElement showBtn;
 
     public void openOperationDetails(){
-
-
-        if(driver instanceof FirefoxDriver) {
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", showOperationsBtn);
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", showOperationsBtn);
-        }else{
-            new Actions(driver).scrollToElement(showOperationsBtn).perform();
-            showOperationsBtn.click();
-        }
+        scrollToElement(showOperationsBtn);
+        clickElement(showOperationsBtn);
     }
 
-    public int checkInterval() throws InterruptedException {
+    public int checkInterval(){
         Date today = new Date();
-        if(driver instanceof FirefoxDriver){
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", startDateInput);
-//            ((JavascriptExecutor) driver).executeScript(("arguments[0].value = 23.04.2015"), startDateInput);
-//            ((JavascriptExecutor) driver).executeScript(("arguments[0].value = " + today.getDate() + "." + (today.getMonth()+1) + "." + (today.getYear() + 1900)), endDateInput);
-            startDateInput.sendKeys("23.04.2015");
 
-            endDateInput.sendKeys(today.getDate() + "." + (today.getMonth()+1) + "." + (today.getYear() + 1900));
+        scrollToElement(startDateInput);
 
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", showBtn);
-        }else{
-            new Actions(driver).scrollToElement(startDateInput).perform();
-            startDateInput.sendKeys("23.04.2015");
+        startDateInput.sendKeys("23.04.2015");
+        endDateInput.sendKeys(today.getDate() + "." + (today.getMonth()+1) + "." + (today.getYear() + 1900));
 
-            endDateInput.sendKeys(today.getDate() + "." + (today.getMonth()+1) + "." + (today.getYear() + 1900));
+        clickElement(showBtn);
 
-            showBtn.click();
-        }
 
         return driver
                 .findElements(By.xpath("//*[@id=\"ReportForm\"]/div[1]/div[3]/div/table/tbody/tr"))
