@@ -177,4 +177,25 @@ public class CommonPage {
         }
     }
 
+    protected boolean isElementSelected(By locator){
+        new WebDriverWait(driver, Duration.of(10, ChronoUnit.SECONDS))
+                .until(ExpectedConditions.elementToBeSelected(locator));
+
+        WebElement element = driver.findElement(locator);
+
+        scrollToElement(element);
+        return element.isSelected();
+    }
+
+    protected boolean isElementDisplayed(By locator){
+        new WebDriverWait(driver, Duration.of(10, ChronoUnit.SECONDS))
+                .until(ExpectedConditions.visibilityOfElementLocated(locator));
+
+        WebElement element = driver.findElement(locator);
+
+        scrollToElement(element);
+        return element.isDisplayed();
+    }
+
+
 }

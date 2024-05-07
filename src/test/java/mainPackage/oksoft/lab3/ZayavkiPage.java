@@ -16,7 +16,7 @@ public class ZayavkiPage extends CommonPage {
     }
 
 
-    @FindBy(xpath = "//*[@id=\"wrapper\"]/div[1]/section/div/div[2]/div/div/button")
+    @FindBy(xpath = "/html/body/div[2]/section/div/div[2]/div/div/button")
     private WebElement openModalZayavkaBtn;
 
     @FindBy(xpath = "//*[@id=\"Amount\"]")
@@ -25,10 +25,10 @@ public class ZayavkiPage extends CommonPage {
     @FindBy(xpath = "//*[@id=\"modalContactForm\"]/div/div/div[2]/div[10]/div[1]/button")
     private WebElement createZayavkaBtn;
 
-    @FindBy(xpath = "//*[@id=\"wrapper\"]/div[1]/section/div/div[3]/section/div[1]/div/div/div[2]/div/div[1]/p[3]")
+    @FindBy(xpath = "/html/body/div[2]/section/div/div[3]/section/div/div/div/div[2]/div/div[1]/p[3]")
     private WebElement zayavkaSum;
 
-    @FindBy(xpath = "//*[@id=\"wrapper\"]/div[1]/section/div/div[3]/section/div[last()]")
+    @FindBy(xpath = "/html/body/div[2]/section/div/div[last()-1]")
     private WebElement lastZayavka;
 
     @FindBy(xpath = "//*[@id=\"FinOrdersOperTypes\"]")

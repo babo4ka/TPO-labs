@@ -1,9 +1,12 @@
 package mainPackage.oksoft.lab3;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import mainPackage.config.ConfProperties;
 import mainPackage.oksoft.CommonPage;
 import mainPackage.oksoft.MainPage;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -90,6 +93,9 @@ public class OksoftTestLab3 {
     public void testZayavkiPage() throws InterruptedException {
         System.out.println("test zayavki" + driver);
         walletPage.openZayavkiPage();
+
+        Allure.getLifecycle().addAttachment("screenshot", "image/png", "png",
+                ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES));
 
         int sum = 150;
         zayavkiPage.createZayavka(sum);
