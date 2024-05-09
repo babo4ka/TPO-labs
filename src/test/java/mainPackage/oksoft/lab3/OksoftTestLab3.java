@@ -1,22 +1,23 @@
 package mainPackage.oksoft.lab3;
 
-import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import mainPackage.config.ConfProperties;
 import mainPackage.oksoft.CommonPage;
 import mainPackage.oksoft.MainPage;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+import mainPackage.oksoft.ScreenMaker;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class OksoftTestLab3 {
@@ -59,6 +60,10 @@ public class OksoftTestLab3 {
         mainPage = new MainPage(driver);
     }
 
+    @AfterClass
+    public static void end() {
+        driver.close();
+    }
 
 
     @Test(testName = "Тестирование страницы \"Мои вознаграждения\"")
@@ -72,6 +77,8 @@ public class OksoftTestLab3 {
         commonPage.openRewardsPage();
 
         rewardsPage.checkPeriod();
+
+        ScreenMaker.takeScreenShot(driver, "Тестирование страницы \"Мои вознаграждения\"");
     }
 
     @Test(testName = "Тестирование страницы \"Мой кошелёк\"")
@@ -84,6 +91,8 @@ public class OksoftTestLab3 {
 
         int operations = walletPage.checkInterval();
 
+        ScreenMaker.takeScreenShot(driver, "Тестирование страницы \"Мой кошелёк\"");
+
         Assert.assertEquals(operations, 1);
     }
 
@@ -94,13 +103,13 @@ public class OksoftTestLab3 {
         System.out.println("test zayavki" + driver);
         walletPage.openZayavkiPage();
 
-        Allure.getLifecycle().addAttachment("screenshot", "image/png", "png",
-                ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES));
-
         int sum = 150;
         zayavkiPage.createZayavka(sum);
 
         String result = "Сумма: " + sum + ",00 ₽";
+
+        ScreenMaker.takeScreenShot(driver, "Тестирование страницы \"Финансовые заявки\"");
+
         Assert.assertEquals(zayavkiPage.checkZayavka(), result);
     }
 
@@ -110,10 +119,8 @@ public class OksoftTestLab3 {
         System.out.println("test scroll" + driver);
         walletPage.openZayavkiPage();
         zayavkiPage.scrollToLast();
+
+        ScreenMaker.takeScreenShot(driver, "Тестирование скролла \"Финансовые заявки\"");
     }
 
-    @AfterClass
-    public static void end() {
-        driver.close();
-    }
 }

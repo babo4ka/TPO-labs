@@ -27,7 +27,7 @@ public class WalletPage extends CommonPage {
     @FindBy(xpath = "//*[@id=\"date_to\"]")
     private WebElement endDateInput;
 
-    @FindBy(xpath = "//*[@id=\"Accounts2051\"]/div/div[4]/button")
+    @FindBy(xpath = "//*[@id=\"Accounts2051\"]/div/div[3]/button")
     private WebElement showOperationsBtn;
 
     @FindBy(xpath = "//*[@id=\"ReportForm\"]/div[1]/div[2]/div/div[2]/button")
