@@ -1,13 +1,15 @@
 package mainPackage.oksoft.lab3;
 
-import com.beust.ah.A;
 import mainPackage.oksoft.CommonPage;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 
 public class ZayavkiPage extends CommonPage {
 
@@ -37,8 +39,43 @@ public class ZayavkiPage extends CommonPage {
     @FindBy(xpath = "//*[@id=\"FinOrdersOperTypes\"]/option[2]")
     private WebElement chooseType;
 
-    public void createZayavka(int sum) throws InterruptedException {
 
+    @FindBy(xpath = "//*[@id=\"toast-container\"]/div/div[2]")
+    private WebElement errorText;
+
+    public String checkZayavkaNegative(int sum) throws InterruptedException {
+        createZayavka(sum);
+
+        new WebDriverWait(driver, Duration.of(10, ChronoUnit.SECONDS))
+                .until(ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//*[@id=\"toast-container\"]/div/div[2]")));
+
+        return getTextFromElement(errorText);
+    }
+
+    public String checkZayavkaWrong(String wrongText) throws InterruptedException {
+        scrollToElement(openModalZayavkaBtn);
+        clickElement(openModalZayavkaBtn);
+
+        Thread.sleep(1000);
+
+        scrollToElement(sumInput);
+        sumInput.sendKeys(wrongText);
+
+        clickElement(changeTypeBox);
+        clickElement(chooseType);
+
+        scrollToElement(createZayavkaBtn);
+        clickElement(createZayavkaBtn);
+
+        new WebDriverWait(driver, Duration.of(10, ChronoUnit.SECONDS))
+                .until(ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//*[@id=\"toast-container\"]/div/div[2]")));
+
+        return getTextFromElement(errorText);
+    }
+
+    public void createZayavka(int sum) throws InterruptedException {
         scrollToElement(openModalZayavkaBtn);
         clickElement(openModalZayavkaBtn);
 
@@ -55,12 +92,7 @@ public class ZayavkiPage extends CommonPage {
     }
 
     public void scrollToLast(){
-        if(driver instanceof FirefoxDriver){
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", lastZayavka);
-        }else{
-            new Actions(driver).scrollToElement(lastZayavka).perform();
-        }
-
+        scrollToElement(lastZayavka);
     }
 
     public String checkZayavka(){

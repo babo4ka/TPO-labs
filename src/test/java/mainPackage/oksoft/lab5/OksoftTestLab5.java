@@ -1,13 +1,10 @@
 package mainPackage.oksoft.lab5;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import io.restassured.RestAssured;
+import io.qameta.allure.Description;
 import mainPackage.config.ConfProperties;
 import mainPackage.oksoft.CommonPage;
 import mainPackage.oksoft.MainPage;
-import mainPackage.oksoft.lab3.RewardsPage;
-import mainPackage.oksoft.lab3.WalletPage;
+import mainPackage.oksoft.ScreenMaker;
 import mainPackage.oksoft.lab3.ZayavkiPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -27,6 +24,8 @@ public class OksoftTestLab5 {
     public static MainPage mainPage;
     public static CommonPage commonPage;
     public static CartPage cartPage;
+
+    public static ZayavkiPage zayavkiPage;
 
 
     private static String login;
@@ -58,6 +57,7 @@ public class OksoftTestLab5 {
 
         commonPage = new CommonPage(driver);
         cartPage = new CartPage(driver);
+        zayavkiPage = new ZayavkiPage(driver);
     }
 
     @AfterClass
@@ -65,15 +65,52 @@ public class OksoftTestLab5 {
         driver.close();
     }
 
-    @Test
+    @Test(testName = "Тестирование корзины")
+    @Description("Тестирование корзины")
     public void testCart(){
         commonPage.openCart();
 
         CartInfo cartInfoFrontend = cartPage.getCartInfo();
 
-        CartApi ca = new CartApi();
-        CartInfo cartInfoApi = ca.getCartInfo();
+        ScreenMaker.takeScreenShot(driver, "корзина");
+
+        CartInfo cartInfoApi = ApiRequests.getCartInfo();
 
         Assert.assertTrue(cartInfoFrontend.equals(cartInfoApi));
+
+        cartPage.exitCartPage();
+    }
+
+
+//    @Test(testName = "Тестирование заявки с отрицательным значением")
+//    @Description("Тестирование заявки с отрицательным значением")
+//    public void testZayavkiNegative() throws InterruptedException {
+//        commonPage.openZayavkiPage();
+//
+//        int sum = -5;
+//
+//        String fronendErrorText = zayavkiPage.checkZayavkaNegative(sum);
+//        System.out.println(fronendErrorText);
+//        Thread.sleep(3000);
+//        String apiErrorText = ApiRequests.getNegativeText();
+//        System.out.println(apiErrorText);
+//
+//        Assert.assertEquals(fronendErrorText, apiErrorText);
+//    }
+
+
+    @Test(testName = "Тестирование заявки с неверным значением")
+    @Description("Тестирование заявки с неверным значением")
+    public void testZayavkiWrong() throws InterruptedException {
+        commonPage.openZayavkiPage();
+
+
+        String fronendErrorText = zayavkiPage.checkZayavkaWrong("dsads");
+        System.out.println(fronendErrorText);
+
+        String apiErrorText = ApiRequests.getWrongText();
+        System.out.println(apiErrorText);
+
+        Assert.assertEquals(fronendErrorText, apiErrorText);
     }
 }

@@ -22,9 +22,12 @@ public class CartPage extends CommonPage {
     @FindBy(xpath = "//*[@id=\"wholeTotalFirst\"]")
     private WebElement totalSumText;
 
+    @FindBy(xpath = "//*[@id=\"ReturnToCatalogueBtn\"]")
+    private WebElement exitCartPageBtn;
+
     public CartInfo getCartInfo(){
         scrollToElement(totalQtyText);
-        System.out.println("text qty " + getTextFromElement(totalQtyText));
+
         int totalQty = Integer.parseInt(getTextFromElement(totalQtyText));
 
         scrollToElement(totalDiscountText);
@@ -46,5 +49,10 @@ public class CartPage extends CommonPage {
                         .replaceAll(",", "."));
 
         return new CartInfo(totalQty, totalSum, totalDiscount, totalVp);
+    }
+
+    public void exitCartPage(){
+        scrollToElement(exitCartPageBtn);
+        clickElement(exitCartPageBtn);
     }
 }
