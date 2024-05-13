@@ -1,6 +1,7 @@
 package mainPackage.oksoft.lab3;
 
 import io.qameta.allure.Description;
+import io.restassured.RestAssured;
 import mainPackage.config.ConfProperties;
 import mainPackage.oksoft.CommonPage;
 import mainPackage.oksoft.MainPage;
