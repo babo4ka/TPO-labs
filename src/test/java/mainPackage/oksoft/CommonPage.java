@@ -80,11 +80,22 @@ public class CommonPage {
         goMainBtn.click();
     }
 
+    //КОРЗИНА
+    @FindBy(xpath = "/html/body/header/nav[2]/div/div[2]/div/a")
+    private WebElement cartBtn;
+
+    public void openCart(){
+        scrollToElement(cartBtn);
+        clickElement(cartBtn);
+    }
+
+
     //выход из аккаунта
     public void logout(){
         accInfo.click();
         logoutBtn.click();
     }
+
 
 //    //открывает меню мой кабинет
 //    public void openMyAccount(){
